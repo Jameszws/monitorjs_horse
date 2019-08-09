@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="func2">性能监听</button>
+        <br><br>
+        <img src="https://pic.xiaohuochai.site/blog/chromePerformance1.png" alt="" width="100%">
+        {{ message +'1'}}
+        <br><br><br><br>
+        <img src="https://pic.xiaohuochai.site/blog/browserRender5.png" alt="" width="100%">
+        {{ message +'2'}}
+        <br><br><br><br>
+        <img :src="src3" alt="" width="100%">
+        {{ message +'3'}}
+        <br><br><br><br>
+        <img :src="src4" alt="" width="100%">
+        {{ message +'4'}}
+    </div>
+    
+    <script src="../dist/monitorjs.min.js"></script>
+    <script src="../node_modules/vue/dist/vue.min.js"></script>
+
+    <script>
+        new MonitorJS().init({
+            url:"",    //上报错误地址
+            consoleError:true,
+            vueError:true,  //是否上报Vue错误
+            vue:Vue,
+            extendsInfo:{   //扩展信息，一般用于数据数据持久化区分
+                FilterOne: "123",
+                FilterTwo: "机票",
+                Module:"Touch站",  //错误
+                Category:"前端错误",
+            }
+        });
+
+        console.error("123123");  //console_error
+        
+        //*
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: "----------------",
+                src3:"https://pic.xiaohuochai.site/blog/chromePerformance2_error.png",
+                src4:"",
+            },
+
+            created() {
+                this.func1().then((ret)=>{
+                    throw new Error("promise error 22222222222");   //promise_error
+                });
+                ss();   //vue_error
+            },
+            
+            mounted() {
+                setTimeout(()=>{
+                    this.src4="https://camo.githubusercontent.com/9f1292f0e9356dab9d9094bca540fd55b1981fa7/68747470733a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f333239303032382d313534636437373333613061353438362e6a70673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430";    
+                },5000)
+            },
+
+            methods: {
+                func1(){
+                    return new Promise((resolve,reject)=>{
+                        resolve();
+                    });
+                },
+                func2(){
+                    new MonitorJS().monitorPerformance({
+                        pageId:"",
+                        url:""
+                    });
+                }
+            },
+        });
+        //*/
+        ss(); //js_error
+    </script>
+</body>
+</html>
