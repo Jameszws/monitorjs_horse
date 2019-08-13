@@ -1,10 +1,10 @@
-###1、简介
+### 1、简介
 monitorjs_horse 是一款前端监控工具，主要包含下面几个方面信息监控：
-* 1）前端错误异常监控；
+* 1）前端异常监控；
 * 2）页面性能监控；
 * 3）设备信息采集；
 
-###2、错误异常捕获详情
+### 2、异常捕获详情
 * 1）js错误信息监控；
 * 2）支持vue错误信息监控（需要将vue传入，并设置vueError:true）；
 * 3）支持promise中未捕获异常信息的抓取；
@@ -12,7 +12,7 @@ monitorjs_horse 是一款前端监控工具，主要包含下面几个方面信�
 * 5）支持console.error错误信息捕获;
 * 6）支持资源错误信息捕获。
 
-###3、页面性能监控
+### 3、页面性能监控
 * 1）重定向的时间；
 * 2）DNS 查询时间；
 * 3）DNS 缓存时间；
@@ -24,7 +24,7 @@ monitorjs_horse 是一款前端监控工具，主要包含下面几个方面信�
 * 9）页面加载完成的时间；
 * ...
 
-###4、设备信息采集
+### 4、设备信息采集
 * 1）设备类型；
 * 2）操作系统；
 * 3）操作系统版本；
@@ -37,22 +37,22 @@ monitorjs_horse 是一款前端监控工具，主要包含下面几个方面信�
 * 10）userAgent；
 * ...
 
-###5、引入方式
+### 5、引入方式
 ```
 1、支持es6方式引入
 import { MonitorJS } from "monitorjs_horse";
 
 2、支持commonjs方式引入
-const MonitorJS = require("monitorjs");
+const MonitorJS = require("monitorjs_horse");
 
 3、支持AMD方式引入
-define(['monitorjs'],(MonitorJS)=>{});
+define(['monitorjs_horse'],(MonitorJS)=>{});
 
 4、支持<script>标签引入方式
 <script src="../node_modules/monitorjs_horse/dist/monitorjs.min.js"></script>
 ```
 
-###6、初始化配置说明
+### 6、初始化配置说明
 ```
 options参数：
     jsError ：配置是否需要监控js错误 （默认true）
@@ -66,14 +66,14 @@ options参数：
     extendsInfo ：自定义扩展信息，一般用于数据持久化区分
 ```
 
-###7、上报页面性能配置说明
+### 7、上报页面性能配置说明
 ```
 options参数：
     pageId ：页面唯一标示
     url ：信息采集上报地址
 ```
 
-###8、Usage
+### 8、Usage
 ```
 1)错误监控初始化代码：
 
@@ -92,7 +92,7 @@ new MonitorJS().monitorPerformance({
 });
 ```
 
-###9、监控返回信息结构
+### 9、监控返回信息结构
 ```
 {
     SubCategory:"", //错误类型(枚举)：js_error 、resource_error、vue_error、promise_error、ajax_error、console_error、unknow_error
@@ -102,7 +102,7 @@ new MonitorJS().monitorPerformance({
     ...extendsInfo //自定义扩展信息，一般用于数据持久化区分【如：1、项目区分(Project)；2、错误大类区分（前端错误、后端错误 等等）】
 }
 ```
-###10、页面性能监控返回信息结构
+### 10、页面性能监控返回信息结构
 ```
 {
     time: 1565161213722, //上报时间
@@ -138,7 +138,7 @@ new MonitorJS().monitorPerformance({
 ```
 
 
-###11、使用时机
+### 11、使用时机
 * 1)普通项目，页面初始化时候，就可以完成初始化监控工具（最好在业务代码的前面，避免监控有漏）；
 * 2)vue项目，需要在new Vue之前初始化监控工具，避免监控有漏；
 

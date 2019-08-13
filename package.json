@@ -1,8 +1,8 @@
 {
   "name": "monitorjs_horse",
   "version": "1.4.3",
-  "description": "前端错误监控、vue错误监控、js错误监控、页面性能监控、设备信息采集",
-  "keywords":["前端错误监控","vue错误监控","js错误监控","页面性能监控","设备信息采集"],
+  "description": "前端异常监控、vue异常监控、js异常监控、页面性能监控、设备信息采集",
+  "keywords":["前端异常监控","vue异常监控","js异常监控","页面性能监控","设备信息采集"],
   "repository": {
 		"type": "git",
 		"url": "https://github.com/Jameszws/monitorjs_horse"
