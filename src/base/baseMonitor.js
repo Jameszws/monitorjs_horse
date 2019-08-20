@@ -1,6 +1,7 @@
 import { ErrorLevelEnum,ErrorCategoryEnum } from "./baseConfig.js";
 import DeviceInfo from "../device";
 import API from "./api.js";
+import utils from "./utils.js";
 
 /**
  * 监控基类
@@ -73,13 +74,41 @@ class BaseMonitor {
         }
         let deviceInfo = this.getDeviceInfo();
         txt += "DeviceInfo: " + deviceInfo; //设备信息
-        let extendsInfo = this.extendsInfo || {};
+        let extendsInfo = this.getExtendsInfo();
         let recordInfo = extendsInfo;
         recordInfo.SubCategory = this.category; //错误分类
         recordInfo.LogType = this.level;  //错误级别
         recordInfo.LogInfo = txt;  //错误信息
         recordInfo.DeviceInfo = deviceInfo; //设备信息
         return recordInfo;
+    }
+
+    /**
+     * 获取扩展信息
+     */
+    getExtendsInfo(){
+        try {
+            let ret = {};
+            let extendsInfo = this.extendsInfo || {};
+            let dynamicParams;
+            if(utils.isFunction(extendsInfo.getDynamic)){
+                dynamicParams = extendsInfo.getDynamic();   //获取动态参数
+            }
+            //判断动态方法返回的参数是否是对象
+            if(utils.isObject(dynamicParams)){
+                extendsInfo = {...extendsInfo,...dynamicParams};
+            }
+            //遍历扩展信息，排除动态方法
+            for(var key in extendsInfo){
+                if(!utils.isFunction(extendsInfo[key])){    //排除获取动态方法
+                    ret[key] = extendsInfo[key];
+                }
+            }
+            return ret;
+        } catch (error) {
+            console.log('call getExtendsInfo error',error);
+            return {};  
+        }
     }
     
     /**
