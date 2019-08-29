@@ -55,6 +55,7 @@ define(['monitorjs_horse'],(MonitorJS)=>{});
 ### 6、初始化配置说明
 ```
 options参数：
+{
     jsError ：配置是否需要监控js错误 （默认true）
     promiseError ：配置是否需要监控promise错误 （默认true）
     resourceError ：配置是否需要监控资源错误 （默认true）
@@ -63,7 +64,14 @@ options参数：
     vueError ：配置是否需要记录vue错误信息 （默认false）
     vue ： 如需监控vue错误信息，则需要传入vue
     url ：错误上报地址
-    extendsInfo ：自定义扩展信息，一般用于数据持久化区分
+    extendsInfo : { //自定义扩展信息，一般用于数据持久化区分
+        A:"", //自定义信息A（名称可自定义）可参考测试栗子 Module
+        B:"", //自定义信息B（名称可自定义）可参考测试栗子 Category
+        getDynamic:()=>{  //获取动态传参  1.4.5版本及以后支持该方式
+            
+        }
+    }
+}
 ```
 
 ### 7、上报页面性能配置说明
@@ -82,7 +90,13 @@ new MonitorJS().init({
     consoleError:true, //配置是否需要记录console.error错误信息
     vueError:true, //配置是否需要记录vue错误信息
     vue:Vue, //如需监控vue错误信息，则需要传入vue
-    extendsInfo:{}   //自定义扩展信息，一般用于数据持久化区分
+    extendsInfo:{ //自定义扩展信息，一般用于数据持久化区分
+        A:"", //自定义信息A（名称可自定义）可参考测试栗子 Module
+        B:"", //自定义信息B（名称可自定义）可参考测试栗子 Category
+        getDynamic:()=>{  //获取动态传参  1.4.5版本及以后支持该方式
+            
+        }
+    }
 });
 
 2）页面性能信息采集：
