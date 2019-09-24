@@ -28,6 +28,16 @@ export class ErrorCategoryEnum {
     static get AJAX_ERROR(){return "ajax_error";}
 
     /**
+     * 控制台错误console.info
+     */
+    static get CONSOLE_INFO(){return "console_info";}
+    
+    /**
+     * 控制台错误console.warn
+     */
+    static get CONSOLE_WARN(){return "console_warn";}
+    
+    /**
      * 控制台错误console.error
      */
     static get CONSOLE_ERROR(){return "console_error";}

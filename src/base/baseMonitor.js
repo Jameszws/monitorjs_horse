@@ -2,6 +2,7 @@ import { ErrorLevelEnum,ErrorCategoryEnum } from "./baseConfig.js";
 import DeviceInfo from "../device";
 import API from "./api.js";
 import utils from "./utils.js";
+import TaskQueue from "./taskQueue.js"
 
 /**
  * 监控基类
@@ -29,27 +30,36 @@ class BaseMonitor {
      * 记录错误信息
      */
     recordError(){
+        this.handleRecordError();
+        //延迟记录日志
         setTimeout(()=>{
-            try {
-                if(!this.msg){
-                    return;
-                }
-                //过滤掉错误上报地址
-                if( this.reportUrl && this.url && this.url.toLowerCase().indexOf(this.reportUrl.toLowerCase())>=0 ){
-                    console.log("统计错误接口异常",this.msg);
-                    return;
-                }
-                let errorInfo = this.handleErrorInfo();
-                
-                console.log("````````````````````` "+this.category+" `````````````````````",errorInfo)
-                
-                //记录日志
-                new API(this.reportUrl).report(errorInfo);
-
-            } catch (error) {
-                console.log(error);
-            }
+            TaskQueue.fire();
         },100);
+    }
+
+    /**
+     * 处理记录日志
+     */
+    handleRecordError(){
+        try {
+            if(!this.msg){
+                return;
+            }
+            //过滤掉错误上报地址
+            if( this.reportUrl && this.url && this.url.toLowerCase().indexOf(this.reportUrl.toLowerCase())>=0 ){
+                console.log("统计错误接口异常",this.msg);
+                return;
+            }
+            let errorInfo = this.handleErrorInfo();
+            
+            console.log("\n````````````````````` "+this.category+" `````````````````````\n",errorInfo)
+            
+            //记录日志
+            TaskQueue.add(this.reportUrl,errorInfo);
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     /**

@@ -29,7 +29,7 @@
 
     <script>
         new MonitorJS().init({
-            url:"",    //上报错误地址
+            url:"http://baidu.com/api",    //上报错误地址
             consoleError:true,
             vueError:true,  //是否上报Vue错误
             vue:Vue,
@@ -50,6 +50,10 @@
         }
 
         console.error("123123");  //console_error
+
+        setTimeout(()=>{
+            console.error("333333333333333333");  //console_error
+        },200);
         
         //*
         var vm = new Vue({

@@ -109,7 +109,7 @@ new MonitorJS().monitorPerformance({
 ### 9、监控返回信息结构
 ```
 {
-    SubCategory:"", //错误类型(枚举)：js_error 、resource_error、vue_error、promise_error、ajax_error、console_error、unknow_error
+    SubCategory:"", //错误类型(枚举)：js_error 、resource_error、vue_error、promise_error、ajax_error、console_info、console_warn、console_error、unknow_error
     LogType: "Info", //日志类型(枚举) Error、Warning、Info
     LogInfo: "", //记录的信息
     DeviceInfo:"", //设备信息(JSON字符串)
@@ -153,8 +153,20 @@ new MonitorJS().monitorPerformance({
 
 
 ### 11、使用时机
-* 1)普通项目，页面初始化时候，就可以完成初始化监控工具（最好在业务代码的前面，避免监控有漏）；
-* 2)vue项目，需要在new Vue之前初始化监控工具，避免监控有漏；
+* 1) 普通项目，页面初始化时候，就可以完成初始化监控工具（最好在业务代码的前面，避免监控有漏）；
+* 2) vue项目，需要在new Vue之前初始化监控工具，避免监控有漏；
 
-##### 项目稳定，系统监控，前端监控必不可少 ^_^
+
+### 版本变更说明
+##### v-1.5.0  
+* 1) console日志细分：console.info 、console.warning 、console.error ，且支持数据持久化；
+* 2) 通过消息队列方式，优化消息持久化，防止多次记录console日志或者极端情况下消息被新消息顶替问题；
+##### v-1.4.7  
+* 1) 支持动态获取参数
+
+#### ……
+
+#
+
+##### 项目稳定，前端监控必不可少 ^_^
 ##### 欢迎留言，一起探讨前端问题 ~~
