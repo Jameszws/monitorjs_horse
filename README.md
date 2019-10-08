@@ -52,39 +52,9 @@ define(['monitorjs_horse'],(MonitorJS)=>{});
 <script src="../node_modules/monitorjs_horse/dist/monitorjs.min.js"></script>
 ```
 
-### 6、初始化配置说明
+### 6、Usage
 ```
-options参数：
-{
-    jsError ：配置是否需要监控js错误 （默认true）
-    promiseError ：配置是否需要监控promise错误 （默认true）
-    resourceError ：配置是否需要监控资源错误 （默认true）
-    ajaxError ：配置是否需要监控ajax错误 （默认true）
-    consoleError ：配置是否需要监控console.error错误 （默认false）
-    vueError ：配置是否需要记录vue错误信息 （默认false）
-    vue ： 如需监控vue错误信息，则需要传入vue
-    url ：错误上报地址
-    extendsInfo : { //自定义扩展信息，一般用于数据持久化区分
-        A:"", //自定义信息A（名称可自定义）可参考测试栗子 Module
-        B:"", //自定义信息B（名称可自定义）可参考测试栗子 Category
-        getDynamic:()=>{  //获取动态传参  1.4.5版本及以后支持该方式
-            
-        }
-    }
-}
-```
-
-### 7、上报页面性能配置说明
-```
-options参数：
-    pageId ：页面唯一标示
-    url ：信息采集上报地址
-```
-
-### 8、Usage
-```
-1)错误监控初始化代码：
-
+1）错误监控初始化代码：
 new MonitorJS().init({
     url:"", //错误上报地址
     consoleError:true, //配置是否需要记录console.error错误信息
@@ -99,14 +69,43 @@ new MonitorJS().init({
     }
 });
 
-2）页面性能信息采集：
+2）参数说明：
+{
+    url ：错误上报地址
+    jsError ：配置是否需要监控js错误 （默认true）
+    promiseError ：配置是否需要监控promise错误 （默认true）
+    resourceError ：配置是否需要监控资源错误 （默认true）
+    ajaxError ：配置是否需要监控ajax错误 （默认true）
+    consoleError ：配置是否需要监控console.error错误 （默认false）
+    vueError ：配置是否需要记录vue错误信息 （默认false）
+    vue ： 如需监控vue错误信息，则需要传入vue
+    extendsInfo : { //自定义扩展信息，一般用于数据持久化区分
+        A:"", //自定义信息A（名称可自定义）可参考测试栗子 Module
+        B:"", //自定义信息B（名称可自定义）可参考测试栗子 Category
+        getDynamic:()=>{  //获取动态传参  1.4.5版本及以后支持该方式
+            
+        }
+    }
+}
+```
+
+### 7、上报页面性能配置说明
+```
+
+1）页面性能信息采集代码：
 new MonitorJS().monitorPerformance({
     pageId:"",  //页面唯一标示
     url:""  //信息采集上报地址
 });
+
+2）参数说明：
+{
+    pageId ：页面唯一标示
+    url ：信息采集上报地址
+}
 ```
 
-### 9、监控返回信息结构
+### 8、监控返回信息结构
 ```
 {
     SubCategory:"", //错误类型(枚举)：js_error 、resource_error、vue_error、promise_error、ajax_error、console_info、console_warn、console_error、unknow_error
@@ -116,7 +115,7 @@ new MonitorJS().monitorPerformance({
     ...extendsInfo //自定义扩展信息，一般用于数据持久化区分【如：1、项目区分(Project)；2、错误大类区分（前端错误、后端错误 等等）】
 }
 ```
-### 10、页面性能监控返回信息结构
+### 9、页面性能监控返回信息结构
 ```
 {
     time: 1565161213722, //上报时间
@@ -151,17 +150,16 @@ new MonitorJS().monitorPerformance({
 }
 ```
 
-
-### 11、使用时机
+### 10、使用时机
 * 1) 普通项目，页面初始化时候，就可以完成初始化监控工具（最好在业务代码的前面，避免监控有漏）；
 * 2) vue项目，需要在new Vue之前初始化监控工具，避免监控有漏；
 
 
-### 版本变更说明
-##### v-1.5.0  
+### 11、版本变更说明
+##### >= v-1.5.0 
 * 1) console日志细分：console.info 、console.warning 、console.error ，且支持数据持久化；
 * 2) 通过消息队列方式，优化消息持久化，防止多次记录console日志或者极端情况下消息被新消息顶替问题；
-##### v-1.4.7  
+##### >= v-1.4.5
 * 1) 支持动态获取参数
 
 #### ……
