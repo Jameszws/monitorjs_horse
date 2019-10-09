@@ -1,6 +1,6 @@
 {
   "name": "monitorjs_horse",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "前端异常监控、vue异常监控、js异常监控、页面性能监控、设备信息采集",
   "keywords":["前端异常监控","vue异常监控","js异常监控","页面性能监控","设备信息采集"],
   "repository": {
