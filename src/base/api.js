@@ -26,7 +26,8 @@ class API {
         try {
             var xhr = new XMLHttpRequest();
             xhr.open("POST",this.url,true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(JSON.stringify(data));
         } catch (error) {
             console.log(error);
