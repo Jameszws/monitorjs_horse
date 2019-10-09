@@ -67,19 +67,19 @@ class BaseMonitor {
      * @param {*} extendsInfo 
      */
     handleErrorInfo(){
-        let txt = "Category: " + this.category + "\n";
-        txt += "Error: " + this.msg + "\n";;
-        txt += "URL: " + this.url + "\n";
+        let txt = "Category: " + this.category + "&#13;";
+        txt += "Error: " + this.msg + "&#13;";
+        txt += "URL: " + this.url + "&#13;";
         switch(this.category){
             case ErrorCategoryEnum.JS_ERROR:
-                txt += "Line: " + this.line + "\n";
-                txt += "Colno: " + this.col + "\n";
+                txt += "Line: " + this.line + "&#13;";
+                txt += "Colno: " + this.col + "&#13;";
                 if (this.errorObj && this.errorObj.stack) {
-                    txt += "Stack: " + this.errorObj.stack + "\n";
+                    txt += "Stack: " + this.errorObj.stack + "&#13;";
                 }
                 break;
             default:
-                txt += "OtherError: " + JSON.stringify(this.errorObj) + "\n";
+                txt += "OtherError: " + JSON.stringify(this.errorObj) + "&#13;";
                 break;
         }
         let deviceInfo = this.getDeviceInfo();
