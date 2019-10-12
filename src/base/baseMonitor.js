@@ -67,29 +67,29 @@ class BaseMonitor {
      * @param {*} extendsInfo 
      */
     handleErrorInfo(){
-        let txt = "Category: " + this.category + "&#13;";
-        txt += "Error: " + this.msg + "&#13;";
-        txt += "URL: " + this.url + "&#13;";
+        let txt = "错误类别: " + this.category + "\r\n";
+        txt += "日志信息: " + this.msg + "\r\n";
+        txt += "url: " + this.url + "\r\n";
         switch(this.category){
             case ErrorCategoryEnum.JS_ERROR:
-                txt += "Line: " + this.line + "&#13;";
-                txt += "Colno: " + this.col + "&#13;";
+                txt += "错误行号: " + this.line + "\r\n";
+                txt += "错误列号: " + this.col + "\r\n";
                 if (this.errorObj && this.errorObj.stack) {
-                    txt += "Stack: " + this.errorObj.stack + "&#13;";
+                    txt += "错误栈: " + this.errorObj.stack + "\r\n";
                 }
                 break;
             default:
-                txt += "OtherError: " + JSON.stringify(this.errorObj) + "&#13;";
+                txt += "其他错误: " + JSON.stringify(this.errorObj) + "\r\n";
                 break;
         }
         let deviceInfo = this.getDeviceInfo();
-        txt += "DeviceInfo: " + deviceInfo; //设备信息
+        txt += "设备信息: " + deviceInfo; //设备信息
         let extendsInfo = this.getExtendsInfo();
         let recordInfo = extendsInfo;
-        recordInfo.SubCategory = this.category; //错误分类
-        recordInfo.LogType = this.level;  //错误级别
-        recordInfo.LogInfo = txt;  //错误信息
-        recordInfo.DeviceInfo = deviceInfo; //设备信息
+        recordInfo.category = this.category; //错误分类
+        recordInfo.logType = this.level;  //错误级别
+        recordInfo.logInfo = txt;  //错误信息
+        recordInfo.deviceInfo = deviceInfo; //设备信息
         return recordInfo;
     }
 

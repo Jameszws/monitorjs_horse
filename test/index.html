@@ -34,12 +34,11 @@
             vueError:true,  //是否上报Vue错误
             vue:Vue,
             extendsInfo:{   //扩展信息，一般用于数据数据持久化区分
-                FilterTwo: "机票",
-                Module:"Touch站",  //错误
-                Category:"前端错误",
+                filterTwo: "机票",
+                module:"Touch站",  //错误
                 getDynamic:()=>{
                     return {
-                        FilterOne:getDynamicParams(),
+                        filterOne:getDynamicParams(),
                     }
                 }
             }

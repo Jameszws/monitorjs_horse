@@ -68,7 +68,7 @@ class API {
         if(!url){
             return false;
         }
-        var urlRule =/^[hH][tT][tT][pP]([sS]?):\/\/(\S+\.)+\S{2,}$/;
+        var urlRule =/^[hH][tT][tT][pP]([sS]?):\/\//;
         return urlRule.test(url);
     }
 
