@@ -24,7 +24,7 @@ class ResourceError extends BaseMonitor {
                 if (!isElementTarget) {
                     return; // js error不再处理
                 }
-                this.level = ErrorLevelEnum.ERROR;
+                this.level = target.tagName.toUpperCase() === 'IMG' ? ErrorLevelEnum.WARN : ErrorLevelEnum.ERROR;
                 this.msg = "加载 "+target.tagName+" 资源错误";
                 this.url = target.src || target.href;
                 this.errorObj = target;

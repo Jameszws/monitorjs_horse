@@ -61,8 +61,8 @@ new MonitorJS().init({
     vueError:true, //配置是否需要记录vue错误信息
     vue:Vue, //如需监控vue错误信息，则需要传入vue
     extendsInfo:{ //自定义扩展信息，一般用于数据持久化区分
-        A:"", //自定义信息A（名称可自定义）可参考测试栗子 Module
-        B:"", //自定义信息B（名称可自定义）可参考测试栗子 Category
+        a:"", //自定义信息a（名称可自定义）可参考测试栗子 module
+        b:"", //自定义信息b（名称可自定义）
         getDynamic:()=>{  //获取动态传参  1.4.5版本及以后支持该方式
             
         }
@@ -80,8 +80,8 @@ new MonitorJS().init({
     vueError ：配置是否需要记录vue错误信息 （默认false）
     vue ： 如需监控vue错误信息，则需要传入vue
     extendsInfo : { //自定义扩展信息，一般用于数据持久化区分
-        A:"", //自定义信息A（名称可自定义）可参考测试栗子 Module
-        B:"", //自定义信息B（名称可自定义）可参考测试栗子 Category
+        a:"", //自定义信息a（名称可自定义）可参考测试栗子 module
+        b:"", //自定义信息b（名称可自定义）
         getDynamic:()=>{  //获取动态传参  1.4.5版本及以后支持该方式
             
         }
@@ -90,17 +90,16 @@ new MonitorJS().init({
 
 3）响应（持久化数据）说明：
 {
-    SubCategory:"", //错误类型(枚举)：js_error 、resource_error、vue_error、promise_error、ajax_error、console_info、console_warn、console_error、unknow_error
-    LogType: "Info", //日志类型(枚举) Error、Warning、Info
-    LogInfo: "", //记录的信息
-    DeviceInfo:"", //设备信息(JSON字符串)
+    category:"", //错误类型(枚举)：js_error 、resource_error、vue_error、promise_error、ajax_error、console_info、console_warn、console_error、unknow_error
+    logType: "Info", //日志类型(枚举) Error、Warning、Info
+    logInfo: "", //记录的信息
+    deviceInfo:"", //设备信息(JSON字符串)
     ...extendsInfo //自定义扩展信息，一般用于数据持久化区分【如：1、项目区分(Project)；2、错误大类区分（前端错误、后端错误 等等）】
 }
 ```
 
 ### 7、上报页面性能Usage
 ```
-
 1）页面性能信息采集代码：
 new MonitorJS().monitorPerformance({
     pageId:"",  //页面唯一标示
@@ -153,6 +152,8 @@ new MonitorJS().monitorPerformance({
 
 
 ### 9、版本变更说明
+##### ~v1.8.0
+1）调整img资源报警级别（warning）
 ##### ~v1.7.0
 1）规范持久化信息小驼峰命名
 2）优化持久化地址url检查
