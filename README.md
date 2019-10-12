@@ -153,6 +153,9 @@ new MonitorJS().monitorPerformance({
 
 
 ### 9、版本变更说明
+##### ~v1.7.0
+1）规范持久化信息小驼峰命名
+2）优化持久化地址url检查
 ##### ~v1.6.0
 1）持久化数据支持 application/json 方式
 ##### ~v1.5.0 
