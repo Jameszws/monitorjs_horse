@@ -7,7 +7,6 @@ class ConsoleError extends BaseMonitor {
     
     constructor(params){
         super(params);
-        this.initConsoleEvent();
     }
 
     /**
@@ -63,23 +62,23 @@ class ConsoleError extends BaseMonitor {
             console.log("console统计错误异常",level,error);
         }
     }
-    
-    /**
-     * 初始化console事件
-     */
-    initConsoleEvent(){  
-        //创建空console对象，避免JS报错  
-        if(!window.console){
-            window.console = {};
-        }
-        /*
-        let funcs = ['info','warn','error'];
-        funcs.forEach((func,index)=>{
-            if(!console[func]){
-                console[func] = function(){};
-            }
-        });
-        */
-    }
+
 }
+
+/**
+ * 初始化console事件
+ */
+(function(){  
+    //创建空console对象，避免JS报错  
+    if(!window.console){
+        window.console = {};
+    }
+    let funcs = ['tInfo','tWarn','tError'];
+    funcs.forEach((func,index)=>{
+        if(!console[func]){
+            console[func] = function(){};
+        }
+    });
+})()
+
 export default ConsoleError;

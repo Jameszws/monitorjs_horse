@@ -150,23 +150,22 @@ new MonitorJS().monitorPerformance({
 1） 普通项目，页面初始化时候，就可以完成初始化监控工具（最好在业务代码的前面，避免监控有漏）；
 2） vue项目，需要在new Vue之前初始化监控工具，避免监控有漏；
 
-
+***
 ### 9、版本变更说明
 ##### ~v2.0.0
-1）由于各个框架都有使用js原生console.info 、console.warn 、console.error记录日志，为了避免这部分信息也被持久化，
-决定重新命名console日志， console日志细分：console.tInfo 、console.tWarn、console.tError ，通过添加前缀t，代替原来console的api
+>1、由于各个框架都有使用js原生console.info 、console.warn 、console.error记录日志，为了避免这部分信息也被持久化，决定重新命名console日志， console日志细分：console.tInfo 、console.tWarn、console.tError ，通过添加前缀t，代替原来console的api
 ##### ~v1.8.0
-1）调整img资源报警级别（warning）
+>1、调整img资源报警级别（warning）
 ##### ~v1.7.0
-1）规范持久化信息小驼峰命名
-2）优化持久化地址url检查
+>1、规范持久化信息小驼峰命名
+>2、优化持久化地址url检查
 ##### ~v1.6.0
-1）持久化数据支持 application/json 方式
+>1、持久化数据支持 application/json 方式
 ##### ~v1.5.0 
-1） console日志细分：console.info 、console.warn 、console.error ，且支持数据持久化；
-2） 通过消息队列方式，优化消息持久化，防止多次记录console日志或者极端情况下消息被新消息顶替问题；
+>1、console日志细分：console.info 、console.warn 、console.error ，且支持数据持久化；
+>2、通过消息队列方式，优化消息持久化，防止多次记录console日志或者极端情况下消息被新消息顶替问题；
 ##### ~v1.4.5
-1） 支持动态获取参数
+>1、支持动态获取参数
 
 #### ……
 
