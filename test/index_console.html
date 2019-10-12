@@ -37,15 +37,15 @@
             return Math.floor((Math.random()*1000)+1);
         }
         
-        console.info("11111111111111");  //console_error
-        console.warn("22222222222222");  //console_error
+        console.tInfo("11111111111111");  //console_error
+        console.tWarn("22222222222222");  //console_error
         setTimeout(()=>{
-            console.error("333333333333333333");  //console_error
+            console.tError("333333333333333333");  //console_error
         },260);
         setTimeout(()=>{
-            console.error("444444444444444444");  //console_error
+            console.tError("444444444444444444");  //console_error
         },200);
-        console.error("5555555555555");  //console_error
+        console.tError("5555555555555");  //console_error
         
     </script>
 </body>

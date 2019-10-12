@@ -24,7 +24,7 @@ class ConsoleError extends BaseMonitor {
      */
     registerInfo(){
         let t = this;
-        console.info=function(){
+        console.tInfo=function(){
             t.handleLog(ErrorLevelEnum.INFO,ErrorCategoryEnum.CONSOLE_INFO,arguments);
         }
     }
@@ -34,7 +34,7 @@ class ConsoleError extends BaseMonitor {
      */
     registerWarn(){
         let t = this;
-        console.warn=function(){
+        console.tWarn=function(){
             t.handleLog(ErrorLevelEnum.WARN,ErrorCategoryEnum.CONSOLE_WARN,arguments);
         }
     }
@@ -44,7 +44,7 @@ class ConsoleError extends BaseMonitor {
      */
     registerError(){
         let t = this;
-        console.error=function(){
+        console.tError=function(){
             t.handleLog(ErrorLevelEnum.ERROR,ErrorCategoryEnum.CONSOLE_ERROR,arguments);
         }
     }
@@ -72,12 +72,14 @@ class ConsoleError extends BaseMonitor {
         if(!window.console){
             window.console = {};
         }
+        /*
         let funcs = ['info','warn','error'];
         funcs.forEach((func,index)=>{
             if(!console[func]){
                 console[func] = function(){};
             }
         });
+        */
     }
 }
 export default ConsoleError;
