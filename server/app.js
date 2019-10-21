@@ -17,7 +17,6 @@ const os = require('os');
 const app = express();
 const router = express.Router();
 const NODE_ENV = process.env.NODE_ENV ;
-const vDir = "/livechatcust";  //虚拟目录
 
 var appInfo = {
 
@@ -32,7 +31,7 @@ var appInfo = {
         var server = app.listen(app.get('port'), function() {
             var port = server.address().port;
             console.log("express server listening on %s : %s", ip, port);
-            opn('http://' + ip + ":" + port + vDir +'/#/?p=3&sourceType=16&openid=oOCyauG9ag5v3AJ7PdVc2Vc0Oe-M');
+            opn('http://' + ip + ":" + port + '/#/?p=3&sourceType=16&openid=oOCyauG9ag5v3AJ7PdVc2Vc0Oe-M');
         });
     },
     
