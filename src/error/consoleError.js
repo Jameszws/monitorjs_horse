@@ -55,7 +55,8 @@ class ConsoleError extends BaseMonitor {
         try {
             this.level = level;
             let params = [...args];
-            this.msg = params.join(",");
+            this.msg = params.join("\r\n"); //换行符分割
+            this.url = location.href;   //当前地址
             this.category = category;
             this.recordError();
         } catch (error) {
