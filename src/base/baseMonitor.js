@@ -69,7 +69,7 @@ class BaseMonitor {
     handleErrorInfo(){
         let txt = "错误类别: " + this.category + "\r\n";
         txt += "日志信息: " + this.msg + "\r\n";
-        txt += "url: " + this.url + "\r\n";
+        txt += "url: " + encodeURIComponent(this.url) + "\r\n";
         switch(this.category){
             case ErrorCategoryEnum.JS_ERROR:
                 txt += "错误行号: " + this.line + "\r\n";

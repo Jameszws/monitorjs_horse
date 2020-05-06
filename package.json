@@ -1,6 +1,6 @@
 {
   "name": "monitorjs_horse",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "前端异常监控、vue异常监控、js异常监控、页面性能监控、设备信息采集",
   "keywords":["前端异常监控","vue异常监控","js异常监控","页面性能监控","设备信息采集"],
   "repository": {
