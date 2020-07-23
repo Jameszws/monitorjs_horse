@@ -18,7 +18,7 @@ class MonitorJS {
     /**
      * 处理异常信息初始化
      * @param {*} options 
-     */
+     */ 
     init(options){
         options = options || {};
         this.jsError = options.jsError || this.jsError;
@@ -58,9 +58,13 @@ class MonitorJS {
         options = options || {};
         let pageId = options.pageId || "";
         let url = options.url || "";
-        new MonitorPerformance().record({
-            pageId,url
-        });
+        var recordFunc = ()=>{
+            new MonitorPerformance().record({
+                pageId,url
+            });
+        };
+        window.removeEventListener("unload",recordFunc);
+        window.addEventListener("unload",recordFunc);
     }
 
 }

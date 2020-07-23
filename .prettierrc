@@ -4,7 +4,7 @@
     "parser": "babel",
     "trailingComma": "none",
     "jsxBracketSameLine": true,
-    "semi": false,
+    "semi": true,
     "singleQuote": true,
     "htmlWhitespaceSensitivity": "ignore",
     "overrides": [

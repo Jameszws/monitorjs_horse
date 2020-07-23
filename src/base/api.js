@@ -23,12 +23,16 @@ class API {
      * 发送消息
      */
     sendInfo(data){
+        let dataStr = JSON.stringify(data);
+        if(navigator.sendBeacon && navigator.sendBeacon(this.url,dataStr)){
+            return;
+        }
         try {
             var xhr = new XMLHttpRequest();
             xhr.open("POST",this.url,true);
             //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify(data));
+            xhr.send(dataStr);
         } catch (error) {
             console.log(error);
         }
@@ -48,6 +52,14 @@ class API {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    
+    /**
+     * sendBeacon上报
+     */
+    reportByNavigator(data){
+        navigator.sendBeacon && navigator.sendBeacon(this.url, data);
     }
 
     /*

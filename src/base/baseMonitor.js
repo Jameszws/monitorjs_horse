@@ -33,7 +33,7 @@ class BaseMonitor {
         this.handleRecordError();
         //延迟记录日志
         setTimeout(()=>{
-            TaskQueue.fire();
+            TaskQueue.isStop && TaskQueue.fire();   //停止则fire
         },100);
     }
 

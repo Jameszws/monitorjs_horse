@@ -43,7 +43,7 @@ const pagePerformance = {
             times.domReadyTime = t.domContentLoadedEventEnd - t.navigationStart;
             //【重要】页面加载完成的时间
             //【原因】这几乎代表了用户等待页面可用的时间
-            times.loadPage = t.loadEventEnd - t.navigationStart;
+            times.loadPageTime = t.loadEventEnd - t.navigationStart;
             
             return times;
             
@@ -72,14 +72,18 @@ const pagePerformance = {
                 templeObj.initiatorType= item.initiatorType;
                 //http协议版本
                 templeObj.nextHopProtocol = item.nextHopProtocol;
+                //重定向时间
+                templeObj.redirectTime = item.redirectEnd - item.redirectStart;
                 //dns查询耗时
                 templeObj.dnsTime = item.domainLookupEnd - item.domainLookupStart;
                 //tcp链接耗时
                 templeObj.tcpTime = item.connectEnd - item.connectStart;
-                //请求时间
-                templeObj.reqTime = item.responseEnd - item.responseStart;
-                //重定向时间
-                templeObj.redirectTime = item.redirectEnd - item.redirectStart;
+                //发送请求到接收到响应第一个字符
+                templeObj.ttfbTime = item.responseStart - item.requestStart;
+                //接收响应的时间（从第一个字符到最后一个字符）
+                templeObj.responseTime = item.responseEnd - item.responseStart;
+                //请求+响应总时间
+                templeObj.reqTotalTime = item.responseEnd - item.requestStart;
                 entryTimesList.push(templeObj);
             }
         });
