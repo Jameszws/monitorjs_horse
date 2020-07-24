@@ -1,7 +1,7 @@
 import { ErrorLevelEnum,ErrorCategoryEnum } from "./baseConfig.js";
 import DeviceInfo from "../device";
 import API from "./api.js";
-import utils from "./utils.js";
+import utils from "../utils/utils.js";
 import TaskQueue from "./taskQueue.js"
 
 /**

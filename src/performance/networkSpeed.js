@@ -1,7 +1,19 @@
+import BaseMonitor from "../base/baseMonitor";
+import { ErrorLevelEnum,ErrorCategoryEnum } from "../base/baseConfig.js";
+
+import API from "../base/api";
+
 /**
  * 粗略检测网速
  */
-class MonitorNetwork {
+class MonitorNetworkSpeed extends BaseMonitor {
+
+    constructor(options){
+        super(options || {});
+        this.category = ErrorCategoryEnum.NETWORK_SPEED;
+        this.pageId= options.pageId || "";
+        this.url= options.url || "";
+    }
 
     /**
      * 图片大小 bytes
@@ -24,6 +36,11 @@ class MonitorNetwork {
     endTime=0;
 
     /**
+     * 上报定时间隔
+     */
+    timeInterval=60*1000;
+
+    /**
      * 当前时间
      */
     now(){
@@ -33,6 +50,17 @@ class MonitorNetwork {
         performance.oNow()        ||
         performance.mozNow()      ||
         new Date().getTime();
+    }
+    
+    /**
+     * 上报网络速度
+     */
+    reportNetworkSpeed(){
+        this.getSpeed();
+        //定时上报
+        setInterval(()=>{
+            this.getSpeed();
+        },this.timeInterval)
     }
 
     /**
@@ -51,7 +79,20 @@ class MonitorNetwork {
                     fileSize = xhr.responseText.length;
                     //单位（KB/s）
                     let speed = fileSize / ((this.endTime - this.startTime)/1000) / 1024;
-                    console.log('当前网速'+speed+'kb/s');
+                    speed = speed.toFixed(2);
+                    let extendsInfo = this.getExtendsInfo();
+                    let data = {
+                        ...extendsInfo,
+                        category:this.category,
+                        logInfo:JSON.stringify({
+                            curTime:new Date().format("yyyy-MM-dd HH:mm:ss"),
+                            pageId:this.pageId,
+                            networkSpeed:speed,
+                            deviceInfo:this.getDeviceInfo()
+                        })
+                    };
+                    console.log('````````````````````` network_speed `````````````````````', data);
+                    new API(this.url).report(data);
                 }
             }
             xhr.open("GET", this.filePath + "?rand=" + Math.random(), true);
@@ -60,7 +101,6 @@ class MonitorNetwork {
             console.log("测试失败：",error);
         }
     }
-
 
     /**
      * 第二种方式：获取网络速度
@@ -92,4 +132,4 @@ class MonitorNetwork {
     }
 }
 
-export default MonitorNetwork;
+export default MonitorNetworkSpeed;

@@ -1,8 +1,8 @@
 import { AjaxError,ConsoleError,JsError,PromiseError,ResourceError,VueError } from './error';
 import { AjaxLibEnum } from "./base/baseConfig.js";
-import API from "./base/api.js";
 import MonitorPerformance from './performance';
-import DeviceInfo from "./device";
+import MonitorNetworkSpeed from './performance/networkSpeed';
+import './utils/extends';
 
 class MonitorJS {
 
@@ -56,12 +56,9 @@ class MonitorJS {
      */
     monitorPerformance(options){
         options = options || {};
-        let pageId = options.pageId || "";
-        let url = options.url || "";
-        var recordFunc = ()=>{
-            new MonitorPerformance().record({
-                pageId,url
-            });
+        new MonitorNetworkSpeed(options).reportNetworkSpeed();
+        let recordFunc = ()=>{
+            new MonitorPerformance(options).record();
         };
         window.removeEventListener("unload",recordFunc);
         window.addEventListener("unload",recordFunc);

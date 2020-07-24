@@ -51,6 +51,16 @@ export class ErrorCategoryEnum {
      * 未知异常
      */
     static get UNKNOW_ERROR(){return "unknow_error";}
+    
+    /**
+     * 性能上报
+     */
+    static get PERFORMANCE(){return "performance";}
+    
+    /**
+     * 网速上报
+     */
+    static get NETWORK_SPEED(){return "network_speed";}
 }
 
 /**

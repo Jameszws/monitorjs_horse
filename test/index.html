@@ -44,6 +44,20 @@
             }
         });
 
+        new MonitorJS().monitorPerformance({
+            pageId:"page_0001",
+            url:"http://baidu.com/api",    //上报错误地址
+            extendsInfo:{   //扩展信息，一般用于数据数据持久化区分
+                module:"Touch站",
+                filterOne: "page_0001",
+                getDynamic:()=>{
+                    return {
+                        filterTow:getDynamicParams(),
+                    };
+                }
+            }
+        });
+
         function getDynamicParams(){
             return Math.floor((Math.random()*1000)+1);
         }

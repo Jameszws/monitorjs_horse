@@ -3,11 +3,14 @@
  */
 import pagePerformance from "./performance.js";
 import DeviceInfo from "../device";
+import BaseMonitor from "../base/baseMonitor";
+import { ErrorCategoryEnum } from "../base/baseConfig.js";
 import API from "../base/api.js";
 
-class MonitorPerformance {
+class MonitorPerformance extends BaseMonitor {
 
-    constructor(){
+    constructor(options){
+        super(options || {});
         this.isPage = true; //是否上报页面性能数据
         this.isResource = true; //是否上报页面资源数据
         this.outTime = 50;
@@ -15,14 +18,17 @@ class MonitorPerformance {
             resourceList:[], //资源列表
             performance:{}, //页面性能列表
         };
+        this.category = ErrorCategoryEnum.PERFORMANCE;
+        this.pageId= options.pageId || "";
+        this.url= options.url || "";
     }
 
     /**
      * 记录页面信息
-     * @param {*} params  {pageId ：页面标示,url ：上报地址}
+     * @param {*} options  {pageId ：页面标示,url ：上报地址}
      */
-    record(params){
-        setTimeout(()=>{
+    record(){
+        try {
             if(this.isPage){
                 this.config.performance = pagePerformance.getTiming();
             }
@@ -30,31 +36,27 @@ class MonitorPerformance {
                 this.config.resourceList = pagePerformance.getEntries();
             }
             let result = {
-                time:new Date().getTime(),
+                curTime:new Date().format("yyyy-MM-dd HH:mm:ss"),
                 performance:this.config.performance,
                 resourceList:this.config.resourceList,
                 markUser:this.markUser(),
                 markUv:this.markUv(),
-                pageId:params?params.pageId:"",
+                pageId:this.pageId,
                 deviceInfo:this.getDeviceInfo()
             };
-            console.log("report data =",result);
+            let extendsInfo = this.getExtendsInfo();
+            let data = {
+                ...extendsInfo,
+                category:this.category,
+                logInfo:JSON.stringify(result)
+            };
+            console.log("report data =",data);
+            localStorage.setItem("page_performance",JSON.stringify(data));
             //发送监控数据
-            new API(params.url).report(result);
+            new API(this.url).report(data);
             this.clearPerformance();
-        },this.outTime);
-    }
-
-    /**
-     * 获取设备信息
-     */
-    getDeviceInfo(){
-        try {
-            let deviceInfo = DeviceInfo.getDeviceInfo();
-            return JSON.stringify(deviceInfo);
         } catch (error) {
-            console.log(error);
-            return "";
+            console.log("性能信息上报异常",error);
         }
     }
 
