@@ -4,7 +4,7 @@
 import pagePerformance from "./performance.js";
 import DeviceInfo from "../device";
 import BaseMonitor from "../base/baseMonitor";
-import { ErrorCategoryEnum } from "../base/baseConfig.js";
+import { ErrorLevelEnum,ErrorCategoryEnum } from "../base/baseConfig.js";
 import API from "../base/api.js";
 
 class MonitorPerformance extends BaseMonitor {
@@ -48,6 +48,7 @@ class MonitorPerformance extends BaseMonitor {
             let data = {
                 ...extendsInfo,
                 category:this.category,
+                logType:ErrorLevelEnum.INFO,
                 logInfo:JSON.stringify(result)
             };
             console.log("report data =",data);

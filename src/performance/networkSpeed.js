@@ -84,6 +84,7 @@ class MonitorNetworkSpeed extends BaseMonitor {
                     let data = {
                         ...extendsInfo,
                         category:this.category,
+                        logType:ErrorLevelEnum.INFO,
                         logInfo:JSON.stringify({
                             curTime:new Date().format("yyyy-MM-dd HH:mm:ss"),
                             pageId:this.pageId,
