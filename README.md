@@ -102,8 +102,17 @@ new MonitorJS().init({
 ```
 1）页面性能信息采集代码：
 new MonitorJS().monitorPerformance({
-    pageId:"",  //页面唯一标示
-    url:""  //信息采集上报地址
+    pageId:"page_0001",  //页面唯一标示
+    url:"",  //信息采集上报地址
+    extendsInfo:{   //扩展信息，一般用于数据数据持久化区分
+        module:"项目",
+        filterOne: "page_0001",
+        getDynamic:()=>{
+            return {
+                filterTow:()=>{},
+            };
+        }
+    }
 });
 
 2）参数说明：
@@ -152,6 +161,10 @@ new MonitorJS().monitorPerformance({
 
 ***
 ### 9、版本变更说明
+##### ~v2.1.1
+>1、优化数据上报
+>2、添加测网速功能(每分钟上报一次)
+>3、修改数据上报fire规则
 ##### ~v2.0.0
 >1、由于各个框架都有使用js原生console.info 、console.warn 、console.error记录日志，为了避免这部分信息也被持久化，决定重新命名console日志， console日志细分：console.tInfo 、console.tWarn、console.tError ，通过添加前缀t，代替原来console的api
 ##### ~v1.8.0
