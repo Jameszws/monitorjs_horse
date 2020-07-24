@@ -24,9 +24,6 @@ class API {
      */
     sendInfo(data){
         let dataStr = JSON.stringify(data);
-        if(navigator.sendBeacon && navigator.sendBeacon(this.url,dataStr)){
-            return;
-        }
         try {
             var xhr = new XMLHttpRequest();
             xhr.open("POST",this.url,true);
