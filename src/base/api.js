@@ -25,6 +25,21 @@ class API {
     sendInfo(data){
         let dataStr = JSON.stringify(data);
         try {
+            if(fetch){
+                fetch(this.url,{
+                    headers: {
+                        "Content-Type": "application/json" 
+                    },
+                    method:"POST",
+                    body:dataStr,
+                    keepalive:true
+                });
+                return;
+            }    
+        } catch (error) {
+            console.log("fetch请求异常",error);
+        }
+        try {
             var xhr = new XMLHttpRequest();
             xhr.open("POST",this.url,true);
             //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
