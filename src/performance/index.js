@@ -54,7 +54,7 @@ class MonitorPerformance extends BaseMonitor {
             console.log("report data =",data);
             localStorage.setItem("page_performance",JSON.stringify(data));
             //发送监控数据
-            new API(this.url).report(data);
+            new API(this.url).report(data,true);
             this.clearPerformance();
         } catch (error) {
             console.log("性能信息上报异常",error);

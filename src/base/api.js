@@ -9,23 +9,24 @@ class API {
     
     /**
      * 上报信息 （默认方式）
+     * isFetch ：是否优先通过fetch上报
      */
-    report(data){
+    report(data,isFetch){
         if(!this.checkUrl(this.url)){
             console.log("上报信息url地址格式不正确,url=",this.url);
             return;
         }
         console.log("上报地址："+this.url);
-        this.sendInfo(data);
+        this.sendInfo(data,isFetch);
     }
 
     /**
      * 发送消息
      */
-    sendInfo(data){
+    sendInfo(data,isFetch){
         let dataStr = JSON.stringify(data);
         try {
-            if(fetch){
+            if(fetch && isFetch){
                 fetch(this.url,{
                     headers: {
                         "Content-Type": "application/json"
