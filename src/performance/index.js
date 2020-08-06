@@ -11,8 +11,11 @@ class MonitorPerformance extends BaseMonitor {
 
     constructor(options){
         super(options || {});
-        this.isPage = true; //是否上报页面性能数据
-        this.isResource = true; //是否上报页面资源数据
+        options.isPage = options.isPage !== false;
+        options.isResource = options.isResource !== false;
+        this.isPage = options.isPage; //是否上报页面性能数据
+        this.isResource = options.isResource; //是否上报页面资源数据
+        this.usefulType = this.getSourceType(options);
         this.outTime = 50;
         this.config = {
             resourceList:[], //资源列表
@@ -21,6 +24,21 @@ class MonitorPerformance extends BaseMonitor {
         this.category = ErrorCategoryEnum.PERFORMANCE;
         this.pageId= options.pageId || "";
         this.url= options.url || "";
+    }
+
+    /**
+     * 获取需要上报资源数据类型
+     * @param {*} options 
+     */
+    getSourceType(options){
+        let usefulType = []; //'navigation'
+        options.isRScript !== false && usefulType.push('script');   //资源数据细分，是否上报script数据
+        options.isRCSS !== false && usefulType.push('css');  //资源数据细分，是否上报CSS数据
+        options.isRFetch !== false && usefulType.push('fetch');  //资源数据细分，是否上报Fetch数据
+        options.isRXHR !== false && usefulType.push('xmlhttprequest');  //资源数据细分，是否上报XHR数据
+        options.isRLink !== false && usefulType.push('link');  //资源数据细分，是否上报Link数据
+        options.isRIMG !== false && usefulType.push('img');  //资源数据细分，是否上报IMG数据
+        return usefulType;
     }
 
     /**
@@ -33,7 +51,7 @@ class MonitorPerformance extends BaseMonitor {
                 this.config.performance = pagePerformance.getTiming();
             }
             if(this.isResource){
-                this.config.resourceList = pagePerformance.getEntries();
+                this.config.resourceList = pagePerformance.getEntries(this.usefulType);
             }
             let result = {
                 curTime:new Date().format("yyyy-MM-dd HH:mm:ss"),
@@ -91,7 +109,7 @@ class MonitorPerformance extends BaseMonitor {
         const date = new Date();
         let psMarkUv = localStorage.getItem('ps_markUv')||'';
         const datatime = localStorage.getItem('ps_markUvTime')||'';
-        const today = date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate()+' 23:59:59';
+        const today = date.format("yyyy/MM/dd 23:59:59");
         if( (!psMarkUv && !datatime) || (date.getTime() > datatime*1) ){
             psMarkUv = this.randomString();
             localStorage.setItem('ps_markUv',psMarkUv);

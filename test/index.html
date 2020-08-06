@@ -46,7 +46,8 @@
 
         new MonitorJS().monitorPerformance({
             pageId:"page_0001",
-            url:"http://baidu.com/api",    //上报错误地址
+            url:"http://baidu.com/api/performance",    //上报错误地址
+            isRXHR:false,
             extendsInfo:{   //扩展信息，一般用于数据数据持久化区分
                 module:"Touch站",
                 filterOne: "page_0001",
