@@ -28,14 +28,15 @@ class API {
             if(fetch){
                 fetch(this.url,{
                     headers: {
-                        "Content-Type": "application/json" 
+                        "Content-Type": "application/json"
                     },
                     method:"POST",
                     body:dataStr,
+                    mode: 'same-origin', // 告诉浏览器是同源，同源后浏览器不会进行预检请求
                     keepalive:true
                 });
                 return;
-            }    
+            }
         } catch (error) {
             console.log("fetch请求异常",error);
         }
