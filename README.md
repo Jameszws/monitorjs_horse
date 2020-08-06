@@ -161,6 +161,11 @@ new MonitorJS().monitorPerformance({
 
 ***
 ### 9、版本变更说明
+
+##### ~v2.1.7
+>1、性能上报添加isRScript、isRCSS、isRFetch、isRXHR、isRLink、isRIMG控制参数，自定义性能数据类型
+>2、上报信息添加isFetch控制
+>3、优化fetch上报，防止同源检测报错
 ##### ~v2.1.1
 >1、优化数据上报
 >2、添加测网速功能(每分钟上报一次)
