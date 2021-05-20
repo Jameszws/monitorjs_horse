@@ -161,7 +161,8 @@ new MonitorJS().monitorPerformance({
 
 ***
 ### 9、版本变更说明
-
+##### ~v2.2.0
+>1、修复无法控制不收集jsError、promiseError、resourceError、ajaxError、consoleError的问题，并显式控制consoleError和vueError
 ##### ~v2.1.7
 >1、性能上报添加isRScript、isRCSS、isRFetch、isRXHR、isRLink、isRIMG控制参数，自定义性能数据类型
 >2、上报信息添加isFetch控制
