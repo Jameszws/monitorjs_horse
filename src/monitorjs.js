@@ -56,7 +56,10 @@ class MonitorJS {
      */
     monitorPerformance(options) {
         options = options || {};
-        new MonitorNetworkSpeed(options).reportNetworkSpeed();
+        //是否需要检测网速
+        if (options.isRNetworkSpeed) {
+            new MonitorNetworkSpeed(options).reportNetworkSpeed();
+        }
         let recordFunc = () => {
             new MonitorPerformance(options).record();
         };

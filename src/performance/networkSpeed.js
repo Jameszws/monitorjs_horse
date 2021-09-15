@@ -60,7 +60,7 @@ class MonitorNetworkSpeed extends BaseMonitor {
         //定时上报
         setInterval(()=>{
             this.getSpeed();
-        },this.timeInterval)
+        },this.timeInterval);
     }
 
     /**
