@@ -72,7 +72,7 @@ class MonitorPerformance extends BaseMonitor {
             console.log("report data =",data);
             localStorage.setItem("page_performance",JSON.stringify(data));
             //发送监控数据
-            new API(this.url).report(data,true);
+            new API(this.url).report(data);
             this.clearPerformance();
         } catch (error) {
             console.log("性能信息上报异常",error);
@@ -80,14 +80,14 @@ class MonitorPerformance extends BaseMonitor {
     }
 
     randomString(len) {
-    　　len = len || 10;
-    　　var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz123456789';
-    　　var maxPos = $chars.length;
-    　　var pwd = '';
-    　　for (let i = 0; i < len; i++) {
-    　　　　pwd = pwd + $chars.charAt(Math.floor(Math.random() * maxPos));
-    　　}
-    　　return pwd + new Date().getTime();
+        len = len || 10;
+        var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz123456789';
+        var maxPos = $chars.length;
+        var pwd = '';
+        for (let i = 0; i < len; i++) {
+            pwd = pwd + $chars.charAt(Math.floor(Math.random() * maxPos));
+        }
+        return pwd + new Date().getTime();
     }
 
     /**
